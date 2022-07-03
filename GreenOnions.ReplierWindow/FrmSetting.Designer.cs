@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.dgvReplies = new System.Windows.Forms.DataGridView();
             this.colMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,14 +40,18 @@
             this.colReplyValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReplyMode = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblInfo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lvImages = new System.Windows.Forms.ListView();
             this.btnAddImage = new System.Windows.Forms.Button();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReplies)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -60,14 +64,14 @@
             // 
             this.dgvReplies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReplies.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReplies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReplies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvReplies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReplies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMessage,
@@ -75,32 +79,34 @@
             this.colTriggerMode,
             this.colReplyValue,
             this.colPriority,
-            this.colReplyMode});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReplies.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colReplyMode,
+            this.colRemove});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReplies.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvReplies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReplies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvReplies.GridColor = System.Drawing.Color.Silver;
             this.dgvReplies.Location = new System.Drawing.Point(0, 21);
             this.dgvReplies.Name = "dgvReplies";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReplies.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReplies.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvReplies.RowHeadersVisible = false;
             this.dgvReplies.RowTemplate.Height = 25;
             this.dgvReplies.Size = new System.Drawing.Size(944, 510);
             this.dgvReplies.TabIndex = 2;
+            this.dgvReplies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReplies_CellContentClick);
             // 
             // colMessage
             // 
@@ -111,6 +117,7 @@
             // colMatchMode
             // 
             this.colMatchMode.DataPropertyName = "MatchMode";
+            this.colMatchMode.FillWeight = 80F;
             this.colMatchMode.HeaderText = "匹配模式";
             this.colMatchMode.Items.AddRange(new object[] {
             "完全",
@@ -123,6 +130,7 @@
             // colTriggerMode
             // 
             this.colTriggerMode.DataPropertyName = "TriggerMode";
+            this.colTriggerMode.FillWeight = 80F;
             this.colTriggerMode.HeaderText = "触发模式";
             this.colTriggerMode.Items.AddRange(new object[] {
             "好友消息",
@@ -138,14 +146,24 @@
             // colPriority
             // 
             this.colPriority.DataPropertyName = "Priority";
+            this.colPriority.FillWeight = 30F;
             this.colPriority.HeaderText = "优先级";
             this.colPriority.Name = "colPriority";
             // 
             // colReplyMode
             // 
             this.colReplyMode.DataPropertyName = "ReplyMode";
+            this.colReplyMode.FillWeight = 80F;
             this.colReplyMode.HeaderText = "以回复方式发送(仅限群)";
             this.colReplyMode.Name = "colReplyMode";
+            // 
+            // colRemove
+            // 
+            this.colRemove.FillWeight = 40F;
+            this.colRemove.HeaderText = "删除";
+            this.colRemove.Name = "colRemove";
+            this.colRemove.Text = "删除";
+            this.colRemove.UseColumnTextForButtonValue = true;
             // 
             // panel1
             // 
@@ -185,6 +203,7 @@
             this.lvImages.Size = new System.Drawing.Size(904, 150);
             this.lvImages.TabIndex = 3;
             this.lvImages.UseCompatibleStateImageBehavior = false;
+            this.lvImages.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvImages_MouseUp);
             // 
             // btnAddImage
             // 
@@ -197,6 +216,20 @@
             this.btnAddImage.UseVisualStyleBackColor = true;
             this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemRemove});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(101, 26);
+            // 
+            // menuItemRemove
+            // 
+            this.menuItemRemove.Name = "menuItemRemove";
+            this.menuItemRemove.Size = new System.Drawing.Size(100, 22);
+            this.menuItemRemove.Text = "删除";
+            this.menuItemRemove.Click += new System.EventHandler(this.MenuItemRemove_Click);
+            // 
             // FrmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -206,11 +239,13 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Name = "FrmSetting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "自定义回复设置";
             ((System.ComponentModel.ISupportInitialize)(this.dgvReplies)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -221,7 +256,6 @@
         private Panel panel1;
         private Panel panel3;
         private Button btnAddImage;
-        private ListView lvImages;
         private Label lblInfo;
         private DataGridViewTextBoxColumn colMessage;
         private DataGridViewComboBoxColumn colMatchMode;
@@ -229,5 +263,9 @@
         private DataGridViewTextBoxColumn colReplyValue;
         private DataGridViewTextBoxColumn colPriority;
         private DataGridViewCheckBoxColumn colReplyMode;
+        private DataGridViewButtonColumn colRemove;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem menuItemRemove;
+        private ListView lvImages;
     }
 }

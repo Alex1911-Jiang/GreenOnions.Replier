@@ -123,5 +123,45 @@ namespace GreenOnions.ReplierWindow
                 return result;
             return TriggerModes.好友消息;
         }
+
+        private void dgvReplies_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                if (dgv.CurrentCell.OwningColumn is DataGridViewButtonColumn btnCol)
+                {
+                    if (btnCol.HeaderText == "删除")
+                    {
+                        DataTable dt = dgvReplies.DataSource as DataTable;
+                        dt.Rows.RemoveAt(e.RowIndex);
+                        dt.AcceptChanges();
+                    }
+                }
+            }
+        }
+
+        private void MenuItemRemove_Click(object sender, EventArgs e)
+        {
+            int index = lvImages.SelectedItems[0].Index;
+            string name = lvImages.SelectedItems[0].Text;
+            imageList.Images.RemoveAt(index);
+            lvImages.Items.RemoveAt(index);
+            for (int i = 0; i < lvImages.Items.Count; i++)
+                lvImages.Items[i].ImageIndex = i;
+            string imageFileName = Path.Combine(_ImagePath, name);
+            if (File.Exists(imageFileName))
+                File.Delete(imageFileName);
+        }
+
+        private void lvImages_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                lvImages.ContextMenuStrip = null;
+                if (lvImages.SelectedItems.Count > 0)
+                    contextMenuStrip.Show(lvImages, new Point(e.X, e.Y));
+            }
+        }
     }
 }
