@@ -37,7 +37,14 @@ namespace GreenOnions.ReplierWindow
             dtSource.Columns.Add("Priority");
             dtSource.Columns.Add("ReplyMode");
             for (int i = 0; i < commandTable.Count; i++)
-                dtSource.Rows.Add(commandTable[i].Message, commandTable[i].MatchMode, commandTable[i].TriggerMode, commandTable[i].ReplyValue, commandTable[i].Priority, commandTable[i].ReplyMode);
+            {
+                List<string> strTriggers = new List<string>();
+                if ((commandTable[i].TriggerMode & TriggerModes.私聊) != 0)
+                    strTriggers.Add("私聊");
+                if ((commandTable[i].TriggerMode & TriggerModes.群组) != 0)
+                    strTriggers.Add("群组");
+                dtSource.Rows.Add(commandTable[i].Message, commandTable[i].MatchMode, $"{string.Join('/', strTriggers)}消息", commandTable[i].ReplyValue, commandTable[i].Priority, commandTable[i].ReplyMode);
+            }
             dgvReplies.DataSource = dtSource;
         }
 
@@ -118,10 +125,15 @@ namespace GreenOnions.ReplierWindow
         private TriggerModes ToTriggerMode(object obj)
         {
             if (obj == null || obj == DBNull.Value)
-                return TriggerModes.好友消息;
-            if (Enum.TryParse(obj.ToString(), out TriggerModes result))
-                return result;
-            return TriggerModes.好友消息;
+                return TriggerModes.私聊;
+            TriggerModes triggerMode = 0;
+            string[] strValues = obj.ToString().Replace("消息", "").Split("/");
+            foreach (string strValue in strValues)
+            {
+                if (Enum.TryParse(strValue, out TriggerModes result))
+                    triggerMode |= result;
+            }
+            return triggerMode;
         }
 
         private void dgvReplies_CellContentClick(object sender, DataGridViewCellEventArgs e)

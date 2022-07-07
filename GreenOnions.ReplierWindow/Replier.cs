@@ -49,7 +49,7 @@ namespace GreenOnions.ReplierWindow
                 var comms = _commandTable.OrderBy(c => c.Priority);
                 foreach (var comm in comms)
                 {
-                    if (comm.TriggerMode == TriggerModes.群组消息 && senderGroup != null)
+                    if ((comm.TriggerMode & TriggerModes.群组) != 0 && senderGroup != null)
                     {
                         GreenOnionsMessages reply = CaeateReply(textMsg, comm);
                         if (reply != null)
@@ -59,11 +59,12 @@ namespace GreenOnions.ReplierWindow
                             return true;
                         }
                     }
-                    else
+                    if ((comm.TriggerMode & TriggerModes.私聊) != 0 && senderGroup == null)
                     {
                         GreenOnionsMessages reply = CaeateReply(textMsg, comm);
                         if (reply != null)
                         {
+                            reply.Reply = comm.ReplyMode;
                             Response(reply);
                             return true;
                         }
@@ -76,21 +77,29 @@ namespace GreenOnions.ReplierWindow
         private GreenOnionsMessages CaeateReply(GreenOnionsTextMessage textMsg, CommandSetting comm)
         {
             if (comm.MatchMode == MatchModes.完全 && textMsg.Text == comm.Message)
-                return ReplaceImages(comm.ReplyValue);
+                return RandomSamePriority(textMsg.Text, comm.Priority);
             else if (comm.MatchMode == MatchModes.前缀 && textMsg.Text.StartsWith(comm.Message))
-                return ReplaceImages(comm.ReplyValue);
+                return RandomSamePriority(textMsg.Text, comm.Priority);
             else if (comm.MatchMode == MatchModes.后缀 && textMsg.Text.EndsWith(comm.Message))
-                return ReplaceImages(comm.ReplyValue);
+                return RandomSamePriority(textMsg.Text, comm.Priority);
             else if (comm.MatchMode == MatchModes.正则表达式)
             {
                 Regex regex = new Regex(comm.Message);
                 Match match = regex.Match(textMsg.Text);
                 if (match.Value == textMsg.Text)
-                    return ReplaceImages(comm.ReplyValue);
+                    return RandomSamePriority(textMsg.Text, comm.Priority);
             }
             else if (comm.MatchMode == MatchModes.包含 && textMsg.Text.Contains(comm.Message))
-                return ReplaceImages(comm.ReplyValue);
+                return RandomSamePriority(textMsg.Text, comm.Priority);
             return null;
+        }
+
+        private GreenOnionsMessages RandomSamePriority(string msgCmd, int priority)
+        {
+            var sameCmdAndPriorityGroup = _commandTable.Where(r => r.Message == msgCmd && r.Priority == priority).ToArray();
+            if (sameCmdAndPriorityGroup.Length > 1)
+                return ReplaceImages(sameCmdAndPriorityGroup[new Random().Next(0, sameCmdAndPriorityGroup.Length)].ReplyValue);
+            return ReplaceImages(sameCmdAndPriorityGroup.First().ReplyValue);
         }
 
         private GreenOnionsMessages ReplaceImages(string textMessage)
@@ -180,9 +189,9 @@ namespace GreenOnions.ReplierWindow
         正则表达式 = 4,
     }
 
-    public enum TriggerModes
+    public enum TriggerModes : int
     {
-        好友消息 = 1,
-        群组消息 = 2,
+        私聊 = 1,
+        群组 = 2,
     }
 }

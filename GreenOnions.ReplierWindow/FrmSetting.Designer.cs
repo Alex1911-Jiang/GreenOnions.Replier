@@ -133,8 +133,9 @@
             this.colTriggerMode.FillWeight = 80F;
             this.colTriggerMode.HeaderText = "触发模式";
             this.colTriggerMode.Items.AddRange(new object[] {
-            "好友消息",
-            "群组消息"});
+            "私聊消息",
+            "群组消息",
+            "私聊/群组消息"});
             this.colTriggerMode.Name = "colTriggerMode";
             // 
             // colReplyValue
@@ -146,20 +147,20 @@
             // colPriority
             // 
             this.colPriority.DataPropertyName = "Priority";
-            this.colPriority.FillWeight = 30F;
+            this.colPriority.FillWeight = 40F;
             this.colPriority.HeaderText = "优先级";
             this.colPriority.Name = "colPriority";
             // 
             // colReplyMode
             // 
             this.colReplyMode.DataPropertyName = "ReplyMode";
-            this.colReplyMode.FillWeight = 80F;
-            this.colReplyMode.HeaderText = "以回复方式发送(仅限群)";
+            this.colReplyMode.FillWeight = 60F;
+            this.colReplyMode.HeaderText = "以回复方式发送";
             this.colReplyMode.Name = "colReplyMode";
             // 
             // colRemove
             // 
-            this.colRemove.FillWeight = 40F;
+            this.colRemove.FillWeight = 30F;
             this.colRemove.HeaderText = "删除";
             this.colRemove.Name = "colRemove";
             this.colRemove.Text = "删除";
@@ -177,11 +178,11 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(181, 2);
+            this.lblInfo.Location = new System.Drawing.Point(19, 2);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(583, 17);
+            this.lblInfo.Size = new System.Drawing.Size(907, 17);
             this.lblInfo.TabIndex = 0;
-            this.lblInfo.Text = "提示：插入图片格式：<图片名称.后缀>，例如\"回复测试<测试图片.jpg>\"。优先级：数字越小优先度越高。";
+            this.lblInfo.Text = "提示：插入图片格式：<图片名称.后缀>，例如\"回复测试<测试图片.jpg>\"。优先级：数字越小优先度越高。随机回复：触发消息和优先级均相等时会随机发送一条回复。";
             // 
             // panel3
             // 
@@ -257,6 +258,9 @@
         private Panel panel3;
         private Button btnAddImage;
         private Label lblInfo;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem menuItemRemove;
+        private ListView lvImages;
         private DataGridViewTextBoxColumn colMessage;
         private DataGridViewComboBoxColumn colMatchMode;
         private DataGridViewComboBoxColumn colTriggerMode;
@@ -264,8 +268,5 @@
         private DataGridViewTextBoxColumn colPriority;
         private DataGridViewCheckBoxColumn colReplyMode;
         private DataGridViewButtonColumn colRemove;
-        private ContextMenuStrip contextMenuStrip;
-        private ToolStripMenuItem menuItemRemove;
-        private ListView lvImages;
     }
 }
